@@ -1,0 +1,15 @@
+{
+  "name": "d3.byte",
+  "version": "0.0.0",
+  "homepage": "https://github.com/krishantaylor/d3-byte",
+  "authors": [
+    "Krishan Taylor"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}
