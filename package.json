@@ -1,0 +1,23 @@
+{
+  "name": "d3-byte",
+  "version": "0.0.0",
+  "description": "d3.byte",
+  "main": "script.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/krishantaylor/d3-byte.git"
+  },
+  "author": "Krishan Taylor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krishantaylor/d3-byte/issues"
+  },
+  "homepage": "https://github.com/krishantaylor/d3-byte",
+  "private": true
+}
