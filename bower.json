@@ -11,5 +11,8 @@
     "node_modules",
     "bower_components",
     "test"
-  ]
+  ],
+  "dependencies": {
+    "d3": "~3.4.6"
+  }
 }
