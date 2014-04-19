@@ -27,7 +27,7 @@ describe('d3.byte.scale', function () {
   describe('#nice()', function () {});
 
   describe('#ticks()', function () {
-    it.skip('generates ticks of varying degree', function () {
+    it('generates ticks of varying degree', function () {
       var s;
       s = d3.byte.scale();
       assert.deepEqual(s.ticks(1), [0, 1]);

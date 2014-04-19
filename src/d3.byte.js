@@ -12,12 +12,45 @@
       return linear(x);
     }
 
+    scale.ticks = function(m) {
+      return d3_byte_scale_ticks(scale.domain(), m);
+    };
+
     scale.copy = function() {
       return d3_byte_scale(linear.copy());
     };
 
-    d3.rebind(scale, linear, 'invert', 'domain', 'range', 'rangeRound', 'interpolate', 'clamp', 'nice', 'ticks', 'tickFormat');
+    d3.rebind(scale, linear, 'invert', 'domain', 'range', 'rangeRound', 'interpolate', 'clamp', 'nice', 'tickFormat');
 
     return scale;
+  }
+
+  function d3_byte_scale_ticks(domain, m) {
+    return d3.range.apply(d3, d3_byte_scale_tickRange(domain, m));
+  }
+
+  function d3_byte_scale_tickRange(domain, m) {
+    if (m == null) {
+      m = 8;
+    }
+
+    var extent = d3.extent(domain),
+      span = extent[1] - extent[0],
+      step = Math.pow(2, Math.floor(Math.log(span / m) / Math.LN2)),
+      err = m / span * step;
+
+    if (err <= 0.3) {
+      step *= 8;
+    } else if (err <= 0.6) {
+      step *= 4;
+    } else if (err <= 0.9) {
+      step *= 2;
+    }
+
+    extent[0] = Math.ceil(extent[0] / step) * step;
+    extent[1] = Math.floor(extent[1] / step) * step + step * 0.5;
+    extent[2] = step;
+
+    return extent;
   }
 })(d3);
