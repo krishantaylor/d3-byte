@@ -95,6 +95,15 @@ describe('d3.byte.scale', function () {
       assert.deepEqual(s.ticks(8).map(s.tickFormat(8, 'KB', false)), ['0', '128', '256', '384', '512', '640', '768', '896']);
       assert.deepEqual(s.ticks(8).map(s.tickFormat(8, 'MB', false)), ['0.000', '0.125', '0.250', '0.375', '0.500', '0.625', '0.750', '0.875']);
     });
+
+    it('count defaults to 8', function () {
+      var s = d3.byte.scale().domain([0, 1023]);
+      assert.deepEqual(s.ticks().map(s.tickFormat()), ['0B', '128B', '256B', '384B', '512B', '640B', '768B', '896B']);
+      assert.deepEqual(s.ticks(1).map(s.tickFormat(1)), ['0B']);
+      assert.deepEqual(s.ticks(2).map(s.tickFormat(2)), ['0B', '512B']);
+      assert.deepEqual(s.ticks(4).map(s.tickFormat(4)), ['0B', '256B', '512B', '768B']);
+      assert.deepEqual(s.ticks(8).map(s.tickFormat(8)), ['0B', '128B', '256B', '384B', '512B', '640B', '768B', '896B']);
+    });
   });
 
   describe('#copy()', function () {});
