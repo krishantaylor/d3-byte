@@ -56,11 +56,11 @@ describe('d3.byte.scale', function () {
   });
 
   describe('#tickFormat()', function () {
-    it('automatically renders with the highest order label');
+    it('defaults to automatic units with labels');
 
-    it('can render the highest order values without the label');
+    it('can render in automatic units without labels');
 
-    it('can render in specific units');
+    it('can render in specific units with labels');
 
     it('can render in specific units without labels');
   });
