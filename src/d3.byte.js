@@ -19,7 +19,11 @@
     scale.tickFormat = function(n, unit, showLabels) {
       var l = arguments.length;
 
-      if (l  === 1) {
+      if (l === 0) {
+        n = 8;
+        unit = null;
+        showLabels = true;
+      } else if (l === 1) {
         unit = null;
         showLabels = true;
       } else if (l === 2) {
