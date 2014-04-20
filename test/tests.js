@@ -18,6 +18,7 @@ describe('d3.byte.scale', function () {
     });
   });
 
+  /*
   describe('#rangeRound()', function () {});
 
   describe('#interpolate()', function () {});
@@ -25,6 +26,7 @@ describe('d3.byte.scale', function () {
   describe('#clamp()', function () {});
 
   describe('#nice()', function () {});
+  */
 
   describe('#ticks()', function () {
     it('generates ticks of varying degree', function () {
