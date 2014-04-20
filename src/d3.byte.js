@@ -59,11 +59,11 @@
       step = Math.pow(2, Math.floor(Math.log(span / m) / Math.LN2)),
       err = m / span * step;
 
-    if (err <= 0.3) {
+    if (err <= 0.25) {
       step *= 8;
-    } else if (err <= 0.6) {
+    } else if (err <= 0.5) {
       step *= 4;
-    } else if (err <= 0.9) {
+    } else if (err <= 0.75) {
       step *= 2;
     }
 
