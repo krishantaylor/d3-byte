@@ -64,12 +64,12 @@
     range = d3_byte_scale_tickRange(domain, n);
 
     if ((level = d3_byte_scale_formatSignificant.indexOf(format)) === -1) {
-      level = Math.floor(Math.log(range[1]) / Math.LN2 / 10 + 0.01);
+      level = Math.floor(Math.log(range[1]) / Math.LN2 / 10 + 0.001);
       format = format === false ? '' : d3_byte_scale_formatSignificant[level];
     }
 
     base = Math.pow(1024, level);
-    precision = -Math.floor(Math.log(range[2] / base) / Math.LN2 + 0.01);
+    precision = -Math.floor(Math.log(range[2] / base) / Math.LN2 + 0.001);
 
     return function(value) {
       return d3.format(',.' + precision + 'f')(value / base) + format;
