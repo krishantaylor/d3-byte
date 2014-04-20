@@ -25,7 +25,7 @@ scale.**nice**([_count_])
 
 scale.**ticks**([_count_])
 
-scale.**tickFormat**(_count_, [_format_])
+scale.**tickFormat**(_count_, [_unit_], [_showLabels_])
 
 scale.**copy**()
 
