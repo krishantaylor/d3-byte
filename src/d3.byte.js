@@ -16,11 +16,15 @@
       return d3_byte_scale_ticks(scale.domain(), m);
     };
 
+    scale.tickFormat = function(n, format) {
+      return d3_byte_scale_tickFormat(scale.domain(), n, format);
+    };
+
     scale.copy = function() {
       return d3_byte_scale(linear.copy());
     };
 
-    d3.rebind(scale, linear, 'invert', 'domain', 'range', 'rangeRound', 'interpolate', 'clamp', 'nice', 'tickFormat');
+    d3.rebind(scale, linear, 'invert', 'domain', 'range', 'rangeRound', 'interpolate', 'clamp', 'nice');
 
     return scale;
   }
@@ -53,4 +57,24 @@
 
     return extent;
   }
+
+  function d3_byte_scale_tickFormat(domain, n, format) {
+    var range, level, base, precision;
+
+    range = d3_byte_scale_tickRange(domain, n);
+
+    if ((level = d3_byte_scale_formatSignificant.indexOf(format)) === -1) {
+      level = Math.floor(Math.log(range[1]) / Math.LN2 / 10 + 0.01);
+      format = format === false ? '' : d3_byte_scale_formatSignificant[level];
+    }
+
+    base = Math.pow(1024, level);
+    precision = -Math.floor(Math.log(range[2] / base) / Math.LN2 + 0.01);
+
+    return function(value) {
+      return d3.format(',.' + precision + 'f')(value / base) + format;
+    };
+  }
+
+  var d3_byte_scale_formatSignificant = ['B', 'KB', 'MB', 'GB', 'TB'];
 })(d3);
