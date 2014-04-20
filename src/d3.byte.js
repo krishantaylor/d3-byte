@@ -16,8 +16,24 @@
       return d3_byte_scale_ticks(scale.domain(), m);
     };
 
-    scale.tickFormat = function(n, format) {
-      return d3_byte_scale_tickFormat(scale.domain(), n, format);
+    scale.tickFormat = function(n, unit, showLabels) {
+      var l = arguments.length;
+
+      if (l  === 1) {
+        unit = null;
+        showLabels = true;
+      } else if (l === 2) {
+        if (typeof unit !== 'string') {
+          showLabels = !!unit;
+          unit = null;
+        } else {
+          showLabels = true;
+        }
+      } else {
+        showLabels = !!showLabels;
+      }
+
+      return d3_byte_scale_tickFormat(scale.domain(), n, unit, showLabels);
     };
 
     scale.copy = function() {
@@ -58,23 +74,24 @@
     return extent;
   }
 
-  function d3_byte_scale_tickFormat(domain, n, format) {
-    var range, level, base, precision;
+  function d3_byte_scale_tickFormat(domain, n, unit, showLabels) {
+    var range, level, base, precision, label;
 
     range = d3_byte_scale_tickRange(domain, n);
 
-    if ((level = d3_byte_scale_formatSignificant.indexOf(format)) === -1) {
+    if ((level = d3_byte_scale_units.indexOf(unit)) === -1) {
       level = Math.floor(Math.log(range[1]) / Math.LN2 / 10 + 0.001);
-      format = format === false ? '' : d3_byte_scale_formatSignificant[level];
+      unit = d3_byte_scale_units[level];
     }
 
     base = Math.pow(1024, level);
     precision = -Math.floor(Math.log(range[2] / base) / Math.LN2 + 0.001);
+    label = showLabels ? unit : '';
 
     return function(value) {
-      return d3.format(',.' + precision + 'f')(value / base) + format;
+      return d3.format(',.' + precision + 'f')(value / base) + label;
     };
   }
 
-  var d3_byte_scale_formatSignificant = ['B', 'KB', 'MB', 'GB', 'TB'];
+  var d3_byte_scale_units = ['B', 'KB', 'MB', 'GB', 'TB'];
 })(d3);
