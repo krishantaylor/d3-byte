@@ -56,13 +56,45 @@ describe('d3.byte.scale', function () {
   });
 
   describe('#tickFormat()', function () {
-    it('defaults to automatic units with labels');
+    it('defaults to automatic units with labels', function () {
+      var s;
+      s = d3.byte.scale();
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10)), ['0.000B', '0.125B', '0.250B', '0.375B', '0.500B', '0.625B', '0.750B', '0.875B', '1.000B']);
+      s = d3.byte.scale().domain([0, 1023]);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10)), ['0B', '128B', '256B', '384B', '512B', '640B', '768B', '896B']);
+      s = d3.byte.scale().domain([0, 1024]);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10)), ['0.000KB', '0.125KB', '0.250KB', '0.375KB', '0.500KB', '0.625KB', '0.750KB', '0.875KB', '1.000KB']);
+      s = d3.byte.scale().domain([0, Math.pow(1024, 2)]);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10)), ['0.000MB', '0.125MB', '0.250MB', '0.375MB', '0.500MB', '0.625MB', '0.750MB', '0.875MB', '1.000MB']);
+    });
 
-    it('can render in automatic units without labels');
+    it('can render in automatic units without labels', function () {
+      var s;
+      s = d3.byte.scale();
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, false)), ['0.000', '0.125', '0.250', '0.375', '0.500', '0.625', '0.750', '0.875', '1.000']);
+      s = d3.byte.scale().domain([0, 1023]);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, false)), ['0', '128', '256', '384', '512', '640', '768', '896']);
+      s = d3.byte.scale().domain([0, 1024]);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, false)), ['0.000', '0.125', '0.250', '0.375', '0.500', '0.625', '0.750', '0.875', '1.000']);
+      s = d3.byte.scale().domain([0, Math.pow(1024, 2)]);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, false)), ['0.000', '0.125', '0.250', '0.375', '0.500', '0.625', '0.750', '0.875', '1.000']);
+    });
 
-    it('can render in specific units with labels');
+    it('can render in specific units with labels', function () {
+      var s = d3.byte.scale().domain([0, Math.pow(1024, 2) - 1]);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10)), ['0KB', '128KB', '256KB', '384KB', '512KB', '640KB', '768KB', '896KB']);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, 'B')), ['0B', '131,072B', '262,144B', '393,216B', '524,288B', '655,360B', '786,432B', '917,504B']);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, 'KB')), ['0KB', '128KB', '256KB', '384KB', '512KB', '640KB', '768KB', '896KB']);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, 'MB')), ['0.000MB', '0.125MB', '0.250MB', '0.375MB', '0.500MB', '0.625MB', '0.750MB', '0.875MB']);
+    });
 
-    it('can render in specific units without labels');
+    it('can render in specific units without labels', function () {
+      var s = d3.byte.scale().domain([0, Math.pow(1024, 2) - 1]);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, false)), ['0', '128', '256', '384', '512', '640', '768', '896']);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, 'B', false)), ['0', '131,072', '262,144', '393,216', '524,288', '655,360', '786,432', '917,504']);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, 'KB', false)), ['0', '128', '256', '384', '512', '640', '768', '896']);
+      assert.deepEqual(s.ticks(10).map(s.tickFormat(10, 'MB', false)), ['0.000', '0.125', '0.250', '0.375', '0.500', '0.625', '0.750', '0.875']);
+    });
   });
 
   describe('#copy()', function () {});
