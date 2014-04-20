@@ -55,7 +55,15 @@ describe('d3.byte.scale', function () {
     });
   });
 
-  describe('#tickFormat()', function () {});
+  describe('#tickFormat()', function () {
+    it('automatically renders with the highest order label');
+
+    it('can render the highest order values without the label');
+
+    it('can render in specific units');
+
+    it('can render in specific units without labels');
+  });
 
   describe('#copy()', function () {});
 });
