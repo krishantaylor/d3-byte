@@ -27,11 +27,31 @@ describe('d3.byte.scale', function () {
   */
 
   describe('#nice()', function () {
-    it('nices the domain, extending it to round numbers');
+    it.skip('nices the domain, extending it to round numbers', function () {
+      var s;
+      s = d3.byte.scale().domain([1, 1023]).nice();
+      assert.deepEqual(s.domain(), [0, 1024]);
+      s = d3.byte.scale().domain([1023, 1]).nice();
+      assert.deepEqual(s.domain(), [1024, 0]);
+      s = d3.byte.scale().domain([0, 0.8]).nice();
+      assert.deepEqual(s.domain(), [0, 0.875]);
+    });
 
-    it('has no effect on degenerate domains');
+    it('has no effect on degenerate domains', function () {
+      var s;
+      s = d3.byte.scale().domain([0, 0]).nice();
+      assert.deepEqual(s.domain(), [0, 0]);
+      s = d3.byte.scale().domain([0.5, 0.5]).nice();
+      assert.deepEqual(s.domain(), [0.5, 0.5]);
+    });
 
-    it('accepts a tick count to control nicing step');
+    it.skip('accepts a tick count to control nicing step', function () {
+      var s;
+      s = d3.byte.scale().domain([200, 800]).nice(4);
+      assert.deepEqual(s.domain(), [128, 896]);
+      s = d3.byte.scale().domain([200, 800]).nice(8);
+      assert.deepEqual(s.domain(), [0, 1024]);
+    });
   });
 
   describe('#ticks()', function () {
