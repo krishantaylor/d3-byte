@@ -40,11 +40,15 @@
       return d3_byte_scale_tickFormat(scale.domain(), n, unit, showLabels);
     };
 
+    scale.nice = function (/*count*/) {
+      return this;
+    };
+
     scale.copy = function () {
       return d3_byte_scale(linear.copy());
     };
 
-    d3.rebind(scale, linear, 'invert', 'domain', 'range' /*, 'rangeRound', 'interpolate', 'clamp', 'nice' */);
+    d3.rebind(scale, linear, 'invert', 'domain', 'range' /*, 'rangeRound', 'interpolate', 'clamp' */);
 
     return scale;
   }

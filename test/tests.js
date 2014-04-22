@@ -24,9 +24,15 @@ describe('d3.byte.scale', function () {
   describe('#interpolate()', function () {});
 
   describe('#clamp()', function () {});
-
-  describe('#nice()', function () {});
   */
+
+  describe('#nice()', function () {
+    it('nices the domain, extending it to round numbers');
+
+    it('has no effect on degenerate domains');
+
+    it('accepts a tick count to control nicing step');
+  });
 
   describe('#ticks()', function () {
     it('generates ticks of varying degree', function () {

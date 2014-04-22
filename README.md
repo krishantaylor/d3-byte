@@ -21,9 +21,9 @@ scale.**rangeRound**(_values_)
 scale.**interpolate**([_factory_])
 
 scale.**clamp**([_boolean_])
+-->
 
 scale.**nice**([_count_])
--->
 
 scale.**ticks**([_count_])
 
