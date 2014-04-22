@@ -12,11 +12,11 @@
       return linear(x);
     }
 
-    scale.ticks = function(m) {
+    scale.ticks = function (m) {
       return d3_byte_scale_ticks(scale.domain(), m);
     };
 
-    scale.tickFormat = function(n, unit, showLabels) {
+    scale.tickFormat = function (n, unit, showLabels) {
       var l = arguments.length;
 
       if (l === 0) {
@@ -40,7 +40,7 @@
       return d3_byte_scale_tickFormat(scale.domain(), n, unit, showLabels);
     };
 
-    scale.copy = function() {
+    scale.copy = function () {
       return d3_byte_scale(linear.copy());
     };
 
